@@ -72,11 +72,11 @@ class CRM:
         attribute_input = input()
 
         print("Enter in the new value of this contact")
-        value = input()
+        value_input = input()
 
         updated_contact = Contact.find(user_input)
 
-        updated_contact.update(attribute_input, value)
+        updated_contact.update(attribute_input, value_input)
 
         print("You have updated your contact information")
 
@@ -101,12 +101,12 @@ class CRM:
 
         print("Which attribute would you like to search by? first_name, last_name, email, note")
 
-        attribute = input()
+        attribute_input = input()
 
         print("Enter in the value of what you are searching for")
-        value = input()
+        value_input = input()
 
-        print("Here is the information: {}".format(Contact.find_by(attribute, value)))
+        print("Here is the information: {}".format(Contact.find_by(attribute_input, value_input)))
 
 
 a_crm_app = CRM()
