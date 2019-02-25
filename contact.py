@@ -62,7 +62,7 @@ class Contact:
             return False
 
     @classmethod
-    def find_by(cls):
+    def find_by(cls, attribute, value):
         """This method should work similarly to the find method above but it should allow you to search for a contact using attributes other than id
     by specifying both the name of the attribute and the value
     eg. searching for 'first_name', 'Betty' should return the first contact
@@ -71,7 +71,16 @@ class Contact:
 
         for i in range(0, len(cls.contacts)):
             this_contact = cls.contacts[i]
-            
+            if attribute == 'first_name' and this_contact.first_name == value:
+                return this_contact
+            elif attribute == 'last_name' and this_contact.last_name == value:
+                return this_contact
+            elif attribute == 'email' and this_contact.email == value:
+                return this_contact
+            elif attribute == 'note' and this_contact.note == value:
+                return this_contact
+            else:
+                return "Contact could not be found"
 
     @classmethod
     def delete_all(cls):
@@ -105,3 +114,4 @@ print(contact1.first_name)
 print(contact2.note)
 contact2.update('note', 'Loves animals')
 print(contact2.note)
+print(Contact.find_by('first_name', 'Vikil'))
