@@ -92,7 +92,9 @@ class CRM:
     def display_all_contacts(self):
         """As a user, if I select display all I am then shown all of the contacts that exist."""
 
-        print("These are all the contacts: {}".format(Contact.all()))
+        print("These are all the contacts")
+        for i in Contact.contacts:
+            print(i.full_name())
 
     def search_by_attribute(self):
         """As a user, if search by attribute is selected, I am prompted to select which attribute I want to search byself.
