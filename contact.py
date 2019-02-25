@@ -15,6 +15,9 @@ class Contact:
         # have a different id
         Contact.next_id += 1
 
+    def __str__(self):
+        return "First Name: {}, Last Name: {}, Email: {}, Note: {}".format(self.first_name, self.last_name, self.email, self.note)
+
     @classmethod
     def create(cls, first_name, last_name, email, note):
         """This method should call the initializer,
