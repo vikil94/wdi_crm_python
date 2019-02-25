@@ -1,6 +1,5 @@
 
 from contact import Contact
-import sys
 
 
 class CRM:
@@ -32,7 +31,7 @@ class CRM:
         elif user_selected == 5:
             self.search_by_attribute()
         elif user_selected == 6:
-            sys.exit()
+            quit()
         else:
             return "Not an option"
 
@@ -62,13 +61,13 @@ class CRM:
         As a user, when I enter the attribute I want to change I am then prompted to enter a new value for the attribute."""
 
         print("Enter the id of the contact you would like to modify")
-        user_input = input()
+        user_input = int(input())
         print("Which part of the contact would you like to change?")
         print("[1] - First Name")
         print("[2] - Last Name")
         print("[3] - Email Address")
         print("[4] - Note")
-        attribute_input = input()
+        attribute_input = int(input())
         print("Enter in the new value of this contact")
         value = input()
         updated_contact = Contact.find(user_input)
@@ -96,6 +95,30 @@ class CRM:
         """As a user, if I select display all I am then shown all of the contacts that exist."""
         Contact.all()
 
-    # def search_by_attribute(self):
+    def search_by_attribute(self):
+        """As a user, if search by attribute is selected, I am prompted to select which attribute I want to search byself.
+        As a user, when I choose which attribute I want to search by, I am then prompted to enter the search term.
+        As a user, when I enter the search term I am then presented with the first contact who matches my search."""
+
+        print("Which attribute would you like to search by?")
+        print("[1] - First Name")
+        print("[2] - Last Name")
+        print("[3] - Email Address")
+        print("[4] - Note")
+        user_input = int(input())
+        print("Enter in the value of what you are searching for")
+        value = input()
+        if user_input == 1:
+            output = Contact.find_by('first_name', value)
+        elif user_input == 2:
+            output = Contact.find_by('last_name', value)
+        elif user_input == 3:
+            output = Contact.find_by('email', value)
+        elif user_input == 4:
+            output = Contact.find_by('note', value)
+
+        print("Here is the information: {}".format(output))
+
+
 a_crm_app = CRM()
 a_crm_app.main_menu()
