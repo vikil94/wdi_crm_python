@@ -89,11 +89,13 @@ class Contact:
 
     def full_name(self):
         """Returns the full (first and last) name of the contact"""
+        return self.first_name + " " + self.last_name
 
     def delete(self):
         """This method should delete the contact
         HINT: Check the Array class docs for built-in methods that might be useful here
         """
+        Contact.contacts.remove(self)
 
         # Feel free to add other methods here, if you need them.
 
@@ -115,3 +117,4 @@ print(contact2.note)
 contact2.update('note', 'Loves animals')
 print(contact2.note)
 print(Contact.find_by('first_name', 'Vikil'))
+print(contact1.full_name())
