@@ -49,7 +49,8 @@ class CRM:
         print('Enter a Note: ')
         note = input()
         # call the appropriate method from the contact class (remember we imported it?):
-        Contact.create(first_name, last_name, email, note)
+        contact = Contact.create(first_name=first_name, last_name=last_name, email=email, note=note)
+        # contact = Contact.create(first_name, last_name, email, note)
 
         # call the appropriate method from the contact class (remember we imported it?):
 
@@ -74,7 +75,7 @@ class CRM:
         print("Enter in the new value of this contact")
         value_input = input()
 
-        updated_contact = Contact.find(user_input)
+        updated_contact = Contact.get(id=user_input)
 
         updated_contact.update(attribute_input, value_input)
 
@@ -85,7 +86,7 @@ class CRM:
 
         print("Enter the id of the contact you want to delete")
         user_input = int(input())
-        this_contact = Contact.find(user_input)
+        this_contact = Contact.get(id=user_input)
         this_contact.delete()
         print("Contact has been deleted")
 
@@ -93,7 +94,7 @@ class CRM:
         """As a user, if I select display all I am then shown all of the contacts that exist."""
 
         print("These are all the contacts:")
-        for i in Contact.contacts:
+        for i in Contact.select():
             print(i.full_name())
 
     def search_by_attribute(self):
@@ -101,14 +102,25 @@ class CRM:
         As a user, when I choose which attribute I want to search by, I am then prompted to enter the search term.
         As a user, when I enter the search term I am then presented with the first contact who matches my search."""
 
-        print("Which attribute would you like to search by? first_name, last_name, email, note")
-
-        attribute_input = input()
-
-        print("Enter in the value of what you are searching for")
-        value_input = input()
-
-        print("Here is the information: {}".format(Contact.find_by(attribute_input, value_input)))
+        print("What attribute would you like to search by?")
+        print("[1] First Name")
+        print("[2] Last Name")
+        print("[3] Email Address")
+        print("[4] Notes")
+        attribute = int(input())
+        print("What value would you like to search by?")
+        value = input()
+        if attribute == 1:
+            output = Contact.get(first_name=value)
+        elif attribute == 2:
+            output = Contact.get(last_name=value)
+        elif attribute == 3:
+            output = Contact.find_by(email=value)
+        elif attribute == 4:
+            output = Contact.find_by(note=value)
+        if output is not False:
+            print("Here is your contact")
+            print("{} {}, Email Address: {}, Note: {}".format(output.first_name, output.last_name, output.email, output.note))
 
 
 a_crm_app = CRM()
