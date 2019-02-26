@@ -53,7 +53,7 @@ class CRM:
 
         # call the appropriate method from the contact class (remember we imported it?):
 
-        Contact.create(first_name, last_name, email, note)
+        # Contact.create(first_name, last_name, email, note)
 
     def modify_existing_contact(self):
         """As a user, if I select modify I am prompted to enter an id for the contact to be modified.
@@ -92,7 +92,7 @@ class CRM:
     def display_all_contacts(self):
         """As a user, if I select display all I am then shown all of the contacts that exist."""
 
-        print("These are all the contacts")
+        print("These are all the contacts:")
         for i in Contact.contacts:
             print(i.full_name())
 
