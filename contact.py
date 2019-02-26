@@ -20,6 +20,3 @@ class Contact(Model):
 # this goes outside the class
 db.connect()
 db.create_tables([Contact])
-
-Contact.create(first_name='Betty', last_name='Maker', email='bettymakes@bitmaker.co', note='this is a note')
-Contact.create(first_name='Vikil', last_name='Naik', email='blah', note='whats up')

@@ -49,7 +49,7 @@ class CRM:
         print('Enter a Note: ')
         note = input()
         # call the appropriate method from the contact class (remember we imported it?):
-        contact = Contact.create(first_name=first_name, last_name=last_name, email=email, note=note)
+        Contact.create(first_name=first_name, last_name=last_name, email=email, note=note)
         # contact = Contact.create(first_name, last_name, email, note)
 
         # call the appropriate method from the contact class (remember we imported it?):
@@ -62,24 +62,32 @@ class CRM:
         As a user, when I enter the attribute I want to change I am then prompted to enter a new value for the attribute."""
 
         print("Enter the id of the contact you would like to modify")
-        user_input = int(input())
+        user_id = int(input())
 
         print("Which part of the contact would you like to change?")
-        print("first_name")
-        print("last_name")
-        print("email")
-        print("note")
-        print("Enter your input")
-        attribute_input = input()
-
-        print("Enter in the new value of this contact")
+        print("1 - FirstName")
+        print("2 - LastName")
+        print("3 - Email")
+        print("4 - Note")
+        print("Enter a number from above")
+        attribute_input = int(input())
+        print("What would you like to change the value to?")
         value_input = input()
+        updated_contact = Contact.get(id=user_id)
 
-        updated_contact = Contact.get(id=user_input)
-
-        updated_contact.update(attribute_input, value_input)
-
-        print("You have updated your contact information")
+        if attribute_input == 1:
+            updated_contact.first_name = value_input
+            updated_contact.save()
+        elif attribute_input == 2:
+            updated_contact.last_name = value_input
+            updated_contact.save()
+        elif attribute_input == 3:
+            updated_contact.email = value_input
+            updated_contact.save()
+        elif attribute_input == 4:
+            updated_contact.note = value_input
+            updated_contact.save()
+        print("Contact has been updated")
 
     def delete_contact(self):
         """As a user, if I select delete I am then prompted to enter the id of the contact I want to delete."""
@@ -87,7 +95,7 @@ class CRM:
         print("Enter the id of the contact you want to delete")
         user_input = int(input())
         this_contact = Contact.get(id=user_input)
-        this_contact.delete()
+        this_contact.delete_instance()
         print("Contact has been deleted")
 
     def display_all_contacts(self):
@@ -95,7 +103,7 @@ class CRM:
 
         print("These are all the contacts:")
         for i in Contact.select():
-            print(i.full_name())
+            print("{} {}, Email: {}, Note: {}".format(i.first_name, i.last_name, i.email, i.note))
 
     def search_by_attribute(self):
         """As a user, if search by attribute is selected, I am prompted to select which attribute I want to search byself.
@@ -103,10 +111,11 @@ class CRM:
         As a user, when I enter the search term I am then presented with the first contact who matches my search."""
 
         print("What attribute would you like to search by?")
-        print("[1] First Name")
-        print("[2] Last Name")
-        print("[3] Email Address")
-        print("[4] Notes")
+        print("1 - First Name")
+        print("2 - Last Name")
+        print("3 - Email Address")
+        print("4 - Notes")
+        print("Enter in one of the numbers from above")
         attribute = int(input())
         print("What value would you like to search by?")
         value = input()
@@ -120,7 +129,7 @@ class CRM:
             output = Contact.find_by(note=value)
         if output is not False:
             print("Here is your contact")
-            print("{} {}, Email Address: {}, Note: {}".format(output.first_name, output.last_name, output.email, output.note))
+            print("{} {}, Email Address: {} Note: {}".format(output.first_name, output.last_name, output.email, output.note))
 
 
 a_crm_app = CRM()
